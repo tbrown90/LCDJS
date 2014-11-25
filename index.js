@@ -42,15 +42,15 @@ var lcd = function LCD() {
     this.pin_e = 24;
     this.pins_db = [23, 17, 21, 22];
 
-    this.init = function init(pin_rs, pin_e, pins_db) {
-        this.pins_rs = pin_rs;
-        this.pin_e = pin_e;
-        this.pins_db = pins_db;
+    this.init = function init(rs, e, db) {
+        this.pins_rs = rs;
+        this.pin_e = e;
+        this.pins_db = db;
 
-        gpio.open(pin_e, 'output');
-        gpio.open(pin_rs, 'output');
-        for (var i = 0; i < pins_db.length; ++i) {
-            gpio.open(pins_db[i], 'output');
+        gpio.open(e, 'output');
+        gpio.open(rs, 'output');
+        for (var i = 0; i < db.length; ++i) {
+            gpio.open(db[i], 'output');
         }
 
         this.write4bits(0x33);

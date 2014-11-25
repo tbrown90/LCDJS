@@ -1,7 +1,7 @@
 var gpio = require('pi-gpio');
 var sleep = require('sleep');
 
-var lcd = function() {
+var lcd = function LCD() {
 
     this.CLEARDISPLAY            = 0x01;
     this.RETURNHOME              = 0x02;
@@ -29,18 +29,18 @@ var lcd = function() {
     this.MOVERIGHT               = 0x04;
     this.MOVELEFT                = 0x00;
 
-    this._BITMODE                = 0x10
-    this._4BITMODE                = 0x00
-    this._2LINE                   = 0x08
-    this._1LINE                   = 0x00
-    this._5x10DOTS                = 0x04
-    this._5x8DOTS                 = 0x00
+    this._BITMODE                = 0x10;
+    this._4BITMODE                = 0x00;
+    this._2LINE                   = 0x08;
+    this._1LINE                   = 0x00;
+    this._5x10DOTS                = 0x04;
+    this._5x8DOTS                 = 0x00;
 
     this.rowOffsets               = [0x00, 0x40, 0x14, 0x54];
 
-    this.pin_rs = 0;
-    this.pin_e = 0;
-    this.pins_db = [];
+    this.pin_rs = 25;
+    this.pin_e = 24;
+    this.pins_db = [23, 17, 21, 22];
 
     this.init = function init(pin_rs, pin_e, pins_db) {
         this.pins_rs = pin_rs;

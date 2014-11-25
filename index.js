@@ -256,3 +256,6 @@ var lcd = function() {
         }
     }
 }
+
+lcd.init(25, 24, [24,17,21,20]);
+module.exports = lcd;

@@ -234,7 +234,7 @@ var lcd = function() {
         return code;
     }
 
-    this.message(text, clear) {
+    this.message = function message(text, clear) {
         if (clear) {
             this.clear();
         }

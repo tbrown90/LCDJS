@@ -189,7 +189,7 @@ var lcd = function() {
 
         this.pulseEnable();
 
-        for (var i = 0; i < this.pins_db) {
+        for (var i = 0; i < this.pins_db; ++i) {
             gpio.write(this.pins_db[i], 0);
         }
 

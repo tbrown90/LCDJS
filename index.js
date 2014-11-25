@@ -1,7 +1,7 @@
 var gpio = require('pi-gpio');
 var sleep = require('sleep');
 
-var lcd = function LCD() {
+function LCD() {
 
     this.CLEARDISPLAY            = 0x01;
     this.RETURNHOME              = 0x02;
@@ -257,5 +257,6 @@ var lcd = function LCD() {
     }
 }
 
+var lcd = new LCD();
 lcd.init(25, 24, [24,17,21,20]);
 module.exports = lcd;

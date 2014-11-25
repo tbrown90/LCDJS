@@ -1,0 +1,28 @@
+{
+  "name": "LCDJS",
+  "version": "0.0.0",
+  "description": "A node library for the raspberry pi to drive a 16x2 LCD display.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tbrown90/LCDJS.git"
+  },
+  "keywords": [
+    "nodejs",
+    "raspberry",
+    "pi"
+  ],
+  "author": "Terry Brown",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tbrown90/LCDJS/issues"
+  },
+  "homepage": "https://github.com/tbrown90/LCDJS",
+  "dependencies": {
+    "pi-gpio": "0.0.6",
+    "sleep": "^1.1.8"
+  }
+}

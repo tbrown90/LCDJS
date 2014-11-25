@@ -1,6 +1,6 @@
 {
   "name": "LCDJS",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "A node library for the raspberry pi to drive a 16x2 LCD display.",
   "main": "index.js",
   "scripts": {

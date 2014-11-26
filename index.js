@@ -53,6 +53,8 @@ function LCD() {
         this.pin_e = e;
         this.pins_db = db;
 
+        this.cleanUp();
+
         gpio.open(e, 'output', gpioError);
         gpio.open(rs, 'output', gpioError);
         for (var i = 0; i < db.length; ++i) {
@@ -77,8 +79,8 @@ function LCD() {
     this.cleanUp = function cleanUp() {
         gpio.close(this.pin_rs, gpioError);
         gpio.close(this.pin_e, gpioError);
-        for (var i = 0; i < pins_db.length; ++i) {
-            gpio.close(pins_db[i], gpioError);
+        for (var i = 0; i < this.pins_db.length; ++i) {
+            gpio.close(this.pins_db[i], gpioError);
         }
     }
 
@@ -264,6 +266,4 @@ function LCD() {
 }
 
 var lcd = new LCD();
-lcd.cleanUp();
-lcd.init(22, 18, [16, 11, 13, 15]);
 module.exports = lcd;

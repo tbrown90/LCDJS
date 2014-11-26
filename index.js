@@ -202,7 +202,7 @@ function LCD() {
 
         this.pulseEnable();
 
-        for (var i = 0; i < this.pins_db; ++i) {
+        for (var i = 0; i < this.pins_db.length; ++i) {
             gpio.write(this.pins_db[i], 0, gpioError);
         }
 

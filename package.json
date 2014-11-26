@@ -22,7 +22,6 @@
   },
   "homepage": "https://github.com/tbrown90/LCDJS",
   "dependencies": {
-    "pi-gpio": "0.0.6",
-    "sleep": "^1.1.8"
+    "node-python": "0.0.4"
   }
 }

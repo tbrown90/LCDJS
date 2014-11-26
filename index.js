@@ -179,7 +179,12 @@ function LCD() {
     this.write4bits = function write4bits(bits, charMode) {
         sleep.usleep(1000);
 
-        bits = zfill(bits, 8);
+        var temp = '';
+        for (var i = 0; i < bits.length; ++i) {
+
+        }
+
+        bits = zfill(bits.toString(2), 8);
 
         var rs = !charMode ? 0 : 1;
 

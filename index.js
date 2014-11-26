@@ -1,7 +1,4 @@
-var python = require('node-python');
-var gpio = python.import('RPi.GPIO');
-
-//var gpio = require('pi-gpio');
+var gpio = require('pi-gpio');
 var sleep = require('sleep');
 
 function LCD() {
@@ -41,9 +38,9 @@ function LCD() {
 
     this.rowOffsets               = [0x00, 0x40, 0x14, 0x54];
 
-    this.pin_rs = 25;
-    this.pin_e = 24;
-    this.pins_db = [23, 17, 27, 22];
+    this.pin_rs = 22;
+    this.pin_e = 18;
+    this.pins_db = [16, 11, 13, 15];
 
     function gpioError(err) {
         if (err) {
@@ -58,11 +55,10 @@ function LCD() {
 
         this.cleanUp();
 
-        gpio.setmode(gpio.BCM);
-        gpio.setup(e, gpio.OUT);
-        gpio.setup(rs, gpio.OUT);
+        gpio.open(e, 'output', gpioError);
+        gpio.open(rs, 'output', gpioError);
         for (var i = 0; i < db.length; ++i) {
-            gpio.setup(db[i], gpio.OUT);
+            gpio.open(db[i], 'output', gpioError);
         }
 
         this.write4bits(0x33);
@@ -81,7 +77,11 @@ function LCD() {
     }
 
     this.cleanUp = function cleanUp() {
-        gpio.cleanup();
+        gpio.close(this.pin_rs, gpioError);
+        gpio.close(this.pin_e, gpioError);
+        for (var i = 0; i < this.pins_db.length; ++i) {
+            gpio.close(this.pins_db[i], gpioError);
+        }
     }
 
     this.begin = function begin(columns, lines) {
@@ -179,31 +179,36 @@ function LCD() {
     this.write4bits = function write4bits(bits, charMode) {
         sleep.usleep(1000);
 
-        bits = zfill(bits.toString(2).substr(2), 8);
+        var temp = '';
+        for (var i = 0; i < bits.length; ++i) {
+
+        }
+
+        bits = zfill(bits.toString(2), 8);
 
         var rs = !charMode ? 0 : 1;
 
-        gpio.output(this.pin_rs, rs);
+        gpio.write(this.pin_rs, rs, gpioError);
 
         for (var i = 0; i < this.pins_db.length; ++i) {
-            gpio.output(this.pins_db[i], 0);
+            gpio.write(this.pins_db[i], 0, gpioError);
         }
 
         for (var i = 0; i < 4; ++i) {
             if (bits[i] === "1") {
-                gpio.output(this.pins_db.reverse()[i], 1);
+                gpio.write(this.pins_db.reverse()[i], 1, gpioError);
             }
         }
 
         this.pulseEnable();
 
         for (var i = 0; i < this.pins_db.length; ++i) {
-            gpio.output(this.pins_db[i], 0);
+            gpio.write(this.pins_db[i], 0, gpioError);
         }
 
         for (var i = 4; i < 8; ++i) {
             if (bits[i] == "1") {
-                gpio.output(this.pins_db.reverse()[i - 4], 1);
+                gpio.write(this.pins_db.reverse()[i - 4], 1, gpioError);
             }
         }
 
@@ -211,11 +216,11 @@ function LCD() {
     }
 
     this.pulseEnable = function pulseEnable() {
-        gpio.output(this.pin_e, 0);
+        gpio.write(this.pin_e, 0, gpioError);
         sleep.usleep(1);
-        gpio.output(this.pin_e, 1);
+        gpio.write(this.pin_e, 1, gpioError);
         sleep.usleep(1);
-        gpio.output(this.pin_e, 0);
+        gpio.write(this.pin_e, 0, gpioError);
         sleep.usleep(1);
     }
 

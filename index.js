@@ -108,18 +108,6 @@ function LCD() {
 
             setupRS(callback);
         });
-
-
-
-        for (var i = 0; i < db.length; ++i) {
-            gpio.setup(db[i], gpio.DIR_OUT, function (err) {
-                gpioError(err);
-                console.log('GPIO setup', db[i]);
-                waiting = false;
-            });
-        }
-
-        finishInit(callback);
     }
 
     this.cleanUp = function cleanUp() {

@@ -84,21 +84,21 @@ function LCD() {
             console.log('GPIO setup', e);
         });
 
-        sleep.usleep(10000);
+        sleep.sleep(1);
         gpio.setup(rs, gpio.DIR_OUT, function (err) {
             gpioError(err);
             console.log('GPIO setup', rs);
         });
 
         for (var i = 0; i < db.length; ++i) {
-            sleep.usleep(10000);
+            sleep.sleep(1);
             gpio.setup(db[i], gpio.DIR_OUT, function (err) {
                 gpioError(err);
                 console.log('GPIO setup', db[i]);
             });
         }
 
-        sleep.usleep(10000);
+        sleep.sleep(1);
         finishInit(callback);
     }
 

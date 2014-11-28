@@ -49,11 +49,11 @@ function LCD() {
     function gpioError(err) {
         if (err) {
             console.log('Error:', err);
-            throw err;
         }
     }
 
     function finishInit(callback) {
+        console.log('finish init');
         this.write4bits(0x33);
         this.write4bits(0x32);
         this.write4bits(0x28);

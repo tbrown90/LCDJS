@@ -179,11 +179,6 @@ function LCD() {
     this.write4bits = function write4bits(bits, charMode) {
         sleep.usleep(1000);
 
-        var temp = '';
-        for (var i = 0; i < bits.length; ++i) {
-
-        }
-
         bits = zfill(bits.toString(2), 8);
 
         var rs = !charMode ? 0 : 1;
@@ -248,6 +243,7 @@ function LCD() {
     }
 
     this.message = function message(text, clear) {
+        console.log('Printing message: ', text);
         if (clear) {
             this.clear();
         }

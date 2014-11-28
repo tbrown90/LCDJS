@@ -97,7 +97,7 @@ function LCD() {
             });
         });
 
-        var interval = setInterval(function() {
+        var interval = setInterval(function(this) {
             'use strict';
             console.log('This', this);
             if (setup) {

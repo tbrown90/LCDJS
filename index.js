@@ -113,7 +113,7 @@ function LCD() {
                 clearInterval(interval);
                 callback();
             }
-        }
+        }, 1000);
     }
 
     this.cleanUp = function cleanUp() {

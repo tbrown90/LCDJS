@@ -84,22 +84,20 @@ function LCD() {
             console.log('GPIO setup', e);
         });
 
-        sleep.sleep(1);
         gpio.setup(rs, gpio.DIR_OUT, function (err) {
             gpioError(err);
             console.log('GPIO setup', rs);
         });
 
+
         for (var i = 0; i < db.length; ++i) {
-            sleep.sleep(1);
             gpio.setup(db[i], gpio.DIR_OUT, function (err) {
                 gpioError(err);
                 console.log('GPIO setup', db[i]);
             });
         }
 
-        sleep.sleep(1);
-        finishInit(callback);
+        setTimeout(finishInit(callback), 2000);
     }
 
     this.cleanUp = function cleanUp() {

@@ -6,6 +6,7 @@ gpio.on('export', function(channel) {
 });
 
 function LCD() {
+    'use strict';
 
     this.CLEARDISPLAY            = 0x01;
     this.RETURNHOME              = 0x02;

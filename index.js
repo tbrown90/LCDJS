@@ -76,28 +76,39 @@ function LCD() {
         this.pin_e = e;
         this.pins_db = db;
 
+        var waiting = true;
         this.cleanUp();
 
         gpio.setMode(gpio.MODE_BCM);
         gpio.setup(e, gpio.DIR_OUT, function (err) {
             gpioError(err);
             console.log('GPIO setup', e);
+            waiting = false;
         });
+
+        while (waiting) {}
+        waiting = true;
 
         gpio.setup(rs, gpio.DIR_OUT, function (err) {
             gpioError(err);
             console.log('GPIO setup', rs);
+            waiting = false;
         });
 
 
         for (var i = 0; i < db.length; ++i) {
+
+            while (waiting) {}
+            waiting = true;
+
             gpio.setup(db[i], gpio.DIR_OUT, function (err) {
                 gpioError(err);
                 console.log('GPIO setup', db[i]);
+                waiting = false;
             });
         }
-
-        setTimeout(finishInit(callback), 2000);
+        while (waiting) {}
+        finishInit(callback);
     }
 
     this.cleanUp = function cleanUp() {

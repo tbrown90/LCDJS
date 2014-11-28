@@ -40,7 +40,7 @@ function LCD() {
 
     this.pin_rs = 25;
     this.pin_e = 24
-    this.pins_db = [23, 17, 21, 22];
+    this.pins_db = [23, 17, 27, 22];
 
     function gpioError(err) {
         if (err) {
@@ -190,7 +190,6 @@ function LCD() {
         }
 
         for (var i = 0; i < 4; ++i) {
-            console.log(bits[i]);
             if (bits[i] === "1") {
                 gpio.write(this.pins_db.reverse()[i], true, gpioError);
             } else {

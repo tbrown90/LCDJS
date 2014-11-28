@@ -14,3 +14,5 @@ var year = date.getFullYear;
 var dateStr = month + '-' + day + '-' + year;
 
 lcd.message(dateStr, true);
+
+lcd.cleanUp();

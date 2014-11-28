@@ -234,6 +234,7 @@ function LCD() {
 
         for (var i = 0; i < 4; ++i) {
             if (bits[i] === "1") {
+                console.log('writing');
                 gpio.write(this.pins_db[i], true, gpioError);
             }
         }
@@ -246,6 +247,7 @@ function LCD() {
 
         for (var i = 4; i < 8; ++i) {
             if (bits[i] == "1") {
+                console.log('writing');
                 gpio.write(this.pins_db[i - 4], true, gpioError);
             }
         }

@@ -71,7 +71,7 @@ function LCD() {
              if (pin < db.length) {
                  setupDB(pin, db, callback);
              } else {
-                finishInit(callback);
+                callback();
              }
         });
     }

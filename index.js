@@ -215,6 +215,7 @@ function LCD() {
         sleep.usleep(1000);
 
         bits = zfill(bits.toString(2), 8);
+        console.log('Writing bits: ', bits);
 
         var rs = !charMode ? false : true;
 

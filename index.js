@@ -99,6 +99,7 @@ function LCD() {
 
         var interval = setInterval(function() {
             'use strict';
+            console.log('This', this);
             if (setup) {
                 this.write4bits(0x33);
                 this.write4bits(0x32);

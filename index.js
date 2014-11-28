@@ -52,24 +52,6 @@ function LCD() {
         }
     }
 
-    function finishInit(callback) {
-        console.log('finish init');
-        this.write4bits(0x33);
-        this.write4bits(0x32);
-        this.write4bits(0x28);
-        this.write4bits(0x0C);
-        this.write4bits(0x06);
-
-        this.displayControl = this.DISPLAYON | this.CURSOROFF | this.BLINKOFF;
-        this.displayFunction = this._4BITMODE | this._1LINE | this._5x8DOTS | this._2LINE;
-
-        this.displayMode = this.ENTRYLEFT | this.ENTRYSHIFTDECREMENT;
-        this.write4bits(this.ENTRYMODESET | this.displayMode);
-
-        this.clear();
-        callback();
-    }
-
     function setupRS(rs, db, callback) {
         console.log('Setting up RS: ', rs);
         gpio.setup(rs, gpio.DIR_OUT, function (err) {
@@ -103,12 +85,35 @@ function LCD() {
         var waiting = true;
         this.cleanUp();
 
+        var setup = false;
         gpio.setup(e, gpio.DIR_OUT, function (err) {
             gpioError(err);
             console.log('GPIO setup', e);
 
-            setupRS(rs, db, callback);
+            setupRS(rs, db, function() {
+                setup = true;
+            });
         });
+
+        var interval = setInterval(function() {
+            if (setup) {
+                this.write4bits(0x33);
+                this.write4bits(0x32);
+                this.write4bits(0x28);
+                this.write4bits(0x0C);
+                this.write4bits(0x06);
+
+                this.displayControl = this.DISPLAYON | this.CURSOROFF | this.BLINKOFF;
+                this.displayFunction = this._4BITMODE | this._1LINE | this._5x8DOTS | this._2LINE;
+
+                this.displayMode = this.ENTRYLEFT | this.ENTRYSHIFTDECREMENT;
+                this.write4bits(this.ENTRYMODESET | this.displayMode);
+
+                this.clear();
+                clearInterval(interval);
+                callback();
+            }
+        }
     }
 
     this.cleanUp = function cleanUp() {

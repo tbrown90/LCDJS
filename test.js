@@ -9,7 +9,7 @@ lcd.init(pin_rs, pin_e, pins_db);
 var date = new Date();
 var day = date.getDay();
 var month = (date.getMonth() + 1);
-var year = date.getFullYear;
+var year = date.getFullYear();
 
 var dateStr = month + '-' + day + '-' + year;
 

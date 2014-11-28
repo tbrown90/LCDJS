@@ -82,9 +82,9 @@ function LCD() {
 
     function setupDB(pin, db, callback) {
         console.log('Setting up DB: ', db[pin]);
-         gpio.setup(db, gpio.DIR_OUT, function (err) {
+         gpio.setup(db[pin], gpio.DIR_OUT, function (err) {
             gpioError(err);
-            console.log('GPIO setup', db);
+            console.log('GPIO setup', db[pin]);
 
              if (pin < db.length) {
                  setupDB(pin++, db, callback);

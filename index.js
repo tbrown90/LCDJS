@@ -82,7 +82,6 @@ function LCD() {
         gpio.setup(e, gpio.DIR_OUT, function (err) {
             gpioError(err);
             console.log('GPIO setup', e);
-            });
         });
 
         sleep.usleep(1000);

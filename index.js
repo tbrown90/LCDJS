@@ -52,6 +52,7 @@ function LCD() {
     }
 
     this.init = function init(rs, e, db) {
+        console.log('Initializing:', rs, e, db);
         this.pins_rs = rs;
         this.pin_e = e;
         this.pins_db = db;
@@ -100,6 +101,7 @@ function LCD() {
     }
 
     this.begin = function begin(columns, lines) {
+        console.log('Begin:', colum, lines);
         if (lines > 1) {
             this.numLines = lines;
             this.displayFunction |= this._2LINE;

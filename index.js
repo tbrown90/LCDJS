@@ -38,9 +38,9 @@ function LCD() {
 
     this.rowOffsets               = [0x00, 0x40, 0x14, 0x54];
 
-    this.pin_rs = 25;
-    this.pin_e = 24
-    this.pins_db = [23, 17, 27, 22];
+    this.pin_rs = 22;
+    this.pin_e = 18;
+    this.pins_db = [16, 11, 13, 15];
 
     function gpioError(err) {
         if (err) {

@@ -1,7 +1,7 @@
 var lcd = require('./index.js');
-var pin_rs = 25;
-var pin_e = 24;
-var pins_db = [24, 17, 27, 22];
+var pin_rs = 22;
+var pin_e = 18;
+var pins_db = [16, 11, 13, 15];
 
 lcd.init(pin_rs, pin_e, pins_db);
 lcd.begin(16, 2);

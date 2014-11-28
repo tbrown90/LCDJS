@@ -60,9 +60,9 @@ function LCD() {
 
         gpio.setMode(gpio.MODE_BCM);
         gpio.setup(e, gpio.DIR_OUT, gpioError);
-        gpio.open(rs, gpio.DIR_OUT, gpioError);
+        gpio.setup(rs, gpio.DIR_OUT, gpioError);
         for (var i = 0; i < db.length; ++i) {
-            gpio.open(db[i], gpio.DIR_OUT, gpioError);
+            gpio.setup(db[i], gpio.DIR_OUT, gpioError);
         }
 
         this.write4bits(0x33);

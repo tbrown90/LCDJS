@@ -1,6 +1,10 @@
 var gpio = require('rpi-gpio');
 var sleep = require('sleep');
 
+gpio.on('export', function(channel) {
+    console.log('Channel set: ', channel);
+});
+
 function LCD() {
 
     this.CLEARDISPLAY            = 0x01;

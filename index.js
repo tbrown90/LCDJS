@@ -53,32 +53,21 @@ function LCD() {
         }
     }
 
-    function finishInit(eSetup, rsSetup, dbSetup, callback) {
-        var allDBSetup = true;
+    function finishInit(callback) {
+        this.write4bits(0x33);
+        this.write4bits(0x32);
+        this.write4bits(0x28);
+        this.write4bits(0x0C);
+        this.write4bits(0x06);
 
-        for (var i = 0; i < dbSetup; ++i) {
-            allDBSetup = dbSetup[i];
-            if (allDBSetup == false) {
-                break;
-            }
-        }
+        this.displayControl = this.DISPLAYON | this.CURSOROFF | this.BLINKOFF;
+        this.displayFunction = this._4BITMODE | this._1LINE | this._5x8DOTS | this._2LINE;
 
-        if (eSetup && rsSetup && allDBSetup) {
-            this.write4bits(0x33);
-            this.write4bits(0x32);
-            this.write4bits(0x28);
-            this.write4bits(0x0C);
-            this.write4bits(0x06);
+        this.displayMode = this.ENTRYLEFT | this.ENTRYSHIFTDECREMENT;
+        this.write4bits(this.ENTRYMODESET | this.displayMode);
 
-            this.displayControl = this.DISPLAYON | this.CURSOROFF | this.BLINKOFF;
-            this.displayFunction = this._4BITMODE | this._1LINE | this._5x8DOTS | this._2LINE;
-
-            this.displayMode = this.ENTRYLEFT | this.ENTRYSHIFTDECREMENT;
-            this.write4bits(this.ENTRYMODESET | this.displayMode);
-
-            this.clear();
-            callback();
-        }
+        this.clear();
+        callback();
     }
 
     this.init = function init(rs, e, db, callback) {
@@ -87,33 +76,31 @@ function LCD() {
         this.pin_e = e;
         this.pins_db = db;
 
-        var eSetup = false;
-        var rsSetup = false;
-        var dbSetup = [false, false, false, false];
-
         this.cleanUp();
 
         gpio.setMode(gpio.MODE_BCM);
         gpio.setup(e, gpio.DIR_OUT, function (err) {
             gpioError(err);
             console.log('GPIO setup', e);
-            eSetup = true;
-
-            gpio.setup(rs, gpio.DIR_OUT, function (err) {
-                gpioError(err);
-                console.log('GPIO setup', rs);
-                rsSetup = true;
-
-                for (var i = 0; i < db.length; ++i) {
-                    gpio.setup(db[i], gpio.DIR_OUT, function (err) {
-                        gpioError(err);
-                        console.log('GPIO setup', db[i]);
-                        dbSetup[i] = true;
-                        finishInit(eSetup, rsSetup, dbSetup, callback);
-                    });
-                }
             });
         });
+
+        sleep.usleep(1000);
+        gpio.setup(rs, gpio.DIR_OUT, function (err) {
+            gpioError(err);
+            console.log('GPIO setup', rs);
+        });
+
+        for (var i = 0; i < db.length; ++i) {
+            sleep.usleep(1000);
+            gpio.setup(db[i], gpio.DIR_OUT, function (err) {
+                gpioError(err);
+                console.log('GPIO setup', db[i]);
+            });
+        }
+
+        sleep.usleep(1000);
+        finishInit(callback);
     }
 
     this.cleanUp = function cleanUp() {

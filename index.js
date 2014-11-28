@@ -181,29 +181,31 @@ function LCD() {
 
         bits = zfill(bits.toString(2), 8);
 
-        var rs = !charMode ? 0 : 1;
+        var rs = !charMode ? false : true;
 
         gpio.write(this.pin_rs, rs, gpioError);
 
         for (var i = 0; i < this.pins_db.length; ++i) {
-            gpio.write(this.pins_db[i], 0, gpioError);
+            gpio.write(this.pins_db[i], false, gpioError);
         }
 
         for (var i = 0; i < 4; ++i) {
+            console.log(bits[i]);
             if (bits[i] === "1") {
-                gpio.write(this.pins_db.reverse()[i], 1, gpioError);
+                gpio.write(this.pins_db.reverse()[i], true, gpioError);
             }
         }
 
         this.pulseEnable();
 
         for (var i = 0; i < this.pins_db.length; ++i) {
-            gpio.write(this.pins_db[i], 0, gpioError);
+            gpio.write(this.pins_db[i], false, gpioError);
         }
 
         for (var i = 4; i < 8; ++i) {
+            console.log(bits[i]);
             if (bits[i] == "1") {
-                gpio.write(this.pins_db.reverse()[i - 4], 1, gpioError);
+                gpio.write(this.pins_db.reverse()[i - 4], true, gpioError);
             }
         }
 

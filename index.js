@@ -98,24 +98,22 @@ function LCD() {
             gpioError(err);
             console.log('GPIO setup', e);
             eSetup = true;
-            finishInit(eSetup, rsSetup, dbSetup, callback);
-        });
 
-        gpio.setup(rs, gpio.DIR_OUT, function (err) {
-            gpioError(err);
-            console.log('GPIO setup', rs);
-            rsSetup = true;
-            finishInit(eSetup, rsSetup, dbSetup, callback);
-        });
-
-        for (var i = 0; i < db.length; ++i) {
-            gpio.setup(db[i], gpio.DIR_OUT, function (err) {
+            gpio.setup(rs, gpio.DIR_OUT, function (err) {
                 gpioError(err);
-                console.log('GPIO setup', db[i]);
-                dbSetup[i] = true;
-                finishInit(eSetup, rsSetup, dbSetup, callback);
+                console.log('GPIO setup', rs);
+                rsSetup = true;
+
+                for (var i = 0; i < db.length; ++i) {
+                    gpio.setup(db[i], gpio.DIR_OUT, function (err) {
+                        gpioError(err);
+                        console.log('GPIO setup', db[i]);
+                        dbSetup[i] = true;
+                        finishInit(eSetup, rsSetup, dbSetup, callback);
+                    });
+                }
             });
-        }
+        });
     }
 
     this.cleanUp = function cleanUp() {

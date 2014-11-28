@@ -225,7 +225,6 @@ function LCD() {
         var rs = !charMode ? false : true;
 
         gpio.write(this.pin_rs, rs, gpioError);
-        sleep.usleep(1000);
 
         for (var i = 0; i < this.pins_db.length; ++i) {
             gpio.write(this.pins_db[i], false, gpioError);

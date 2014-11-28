@@ -222,12 +222,8 @@ function LCD() {
         sleep.usleep(1000);
 
         bits = zfill(bits.toString(2), 8);
-        console.log('Writing bits: ', bits);
-
         var rs = !charMode ? false : true;
 
-        console.log('Pins DB + ', this.pins_db);
-        console.log(this.pins_db.reverse());
         gpio.write(this.pin_rs, rs, gpioError);
 
         for (var i = 0; i < this.pins_db.length; ++i) {
@@ -235,8 +231,8 @@ function LCD() {
         }
 
         for (var i = 0; i < 4; ++i) {
-            if (bits[i] == "1") {
-                gpio.write(this.pins_db[i], true, gpioError);
+            if (bits[i] === "1") {
+                gpio.write(this.pins_db.reverse()[i], true, gpioError);
             }
         }
 
@@ -247,8 +243,8 @@ function LCD() {
         }
 
         for (var i = 4; i < 8; ++i) {
-            if (bits[i] == "1") {
-                gpio.write(this.pins_db[i - 4], true, gpioError);
+            if (bits[i] === "1") {
+                gpio.write(this.pins_db.reverse()[i - 4], true, gpioError);
             }
         }
 

@@ -82,18 +82,16 @@ function LCD() {
 
     function setupDB(pin, db, callback) {
         console.log('Setting up DB: ', db[pin]);
-        setTimeout(function() {
-            gpio.setup(db[pin], gpio.DIR_OUT, function (err) {
-                gpioError(err);
-                console.log('GPIO setup', db[pin]);
+        gpio.setup(db[pin], gpio.DIR_OUT, function (err) {
+            gpioError(err);
+            console.log('GPIO setup', db[pin]);
 
-                 if (pin < db.length) {
-                     setupDB(pin++, db, callback);
-                 } else {
-                    finishInit(callback);
-                 }
-            });
-        }, 1000);
+             if (pin < db.length) {
+                 setupDB(pin++, db, callback);
+             } else {
+                finishInit(callback);
+             }
+        });
     }
 
     this.init = function init(rs, e, db, callback) {
@@ -105,7 +103,6 @@ function LCD() {
         var waiting = true;
         this.cleanUp();
 
-        gpio.setMode(gpio.MODE_BCM);
         gpio.setup(e, gpio.DIR_OUT, function (err) {
             gpioError(err);
             console.log('GPIO setup', e);

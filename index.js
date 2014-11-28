@@ -193,6 +193,8 @@ function LCD() {
             console.log(bits[i]);
             if (bits[i] === "1") {
                 gpio.write(this.pins_db.reverse()[i], true, gpioError);
+            } else {
+                gpio.write(this.pins_db.reverse()[i], false, gpioError);
             }
         }
 
@@ -203,9 +205,10 @@ function LCD() {
         }
 
         for (var i = 4; i < 8; ++i) {
-            console.log(bits[i]);
             if (bits[i] == "1") {
                 gpio.write(this.pins_db.reverse()[i - 4], true, gpioError);
+            } else {
+                gpio.write(this.pins_db.reverse()[i - 4], false, gpioError);
             }
         }
 

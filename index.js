@@ -53,7 +53,7 @@ function LCD() {
         }
     }
 
-    function finishInit(callback) {
+    function finishInit(this, callback) {
         this.write4bits(0x33);
         this.write4bits(0x32);
         this.write4bits(0x28);
@@ -70,24 +70,24 @@ function LCD() {
         callback();
     }
 
-    function setupRS(callback) {
+    function setupRS(this, callback) {
         console.log('Setting up RS: ', this.pin_rs);
         gpio.setup(this.pin_rs, gpio.DIR_OUT, function (err) {
             gpioError(err);
             console.log('GPIO setup', this.pin_rs);
 
-            setupDB(0, callback);
+            setupDB(this, 0, callback);
         });
     }
 
-    function setupDB(pin, callback) {
+    function setupDB(this, pin, callback) {
         console.log('Setting up DB: ', this.pins_db[pin]);
          gpio.setup(this.pins_db[pin], gpio.DIR_OUT, function (err) {
             gpioError(err);
             console.log('GPIO setup', this.pins_db[pin]);
 
              if (pin < this.pins_db.length) {
-                 setupDB(pin++);
+                 setupDB(this, pin++, callback);
              } else {
                 finishInit(callback);
              }
@@ -108,7 +108,7 @@ function LCD() {
             gpioError(err);
             console.log('GPIO setup', e);
 
-            setupRS(callback);
+            setupRS(this, callback);
         });
     }
 

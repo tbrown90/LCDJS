@@ -1,4 +1,4 @@
-var gpio = require('pi-gpio');
+var gpio = require('rpi-gpio');
 var sleep = require('sleep');
 
 function LCD() {
@@ -38,9 +38,9 @@ function LCD() {
 
     this.rowOffsets               = [0x00, 0x40, 0x14, 0x54];
 
-    this.pin_rs = 22;
-    this.pin_e = 18;
-    this.pins_db = [16, 11, 13, 15];
+    this.pin_rs = 25;
+    this.pin_e = 24
+    this.pins_db = [23, 17, 21, 22];
 
     function gpioError(err) {
         if (err) {
@@ -58,10 +58,11 @@ function LCD() {
 
         this.cleanUp();
 
-        gpio.open(e, 'output', gpioError);
-        gpio.open(rs, 'output', gpioError);
+        gpio.setMode(gpio.MODE_BCM);
+        gpio.setup(e, gpio.DIR_OUT, gpioError);
+        gpio.open(rs, gpio.DIR_OUT, gpioError);
         for (var i = 0; i < db.length; ++i) {
-            gpio.open(db[i], 'output', gpioError);
+            gpio.open(db[i], gpio.DIR_OUT, gpioError);
         }
 
         this.write4bits(0x33);
@@ -80,11 +81,7 @@ function LCD() {
     }
 
     this.cleanUp = function cleanUp() {
-        gpio.close(this.pin_rs, gpioError);
-        gpio.close(this.pin_e, gpioError);
-        for (var i = 0; i < this.pins_db.length; ++i) {
-            gpio.close(this.pins_db[i], gpioError);
-        }
+        gpio.destroy();
     }
 
     this.begin = function begin(columns, lines) {

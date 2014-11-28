@@ -226,7 +226,7 @@ function LCD() {
 
         var rs = !charMode ? false : true;
 
-        console.log('Pins DB + ' this.pins_db);
+        console.log('Pins DB + ', this.pins_db);
         console.log(this.pins_db.reverse());
         gpio.write(this.pin_rs, rs, gpioError);
 

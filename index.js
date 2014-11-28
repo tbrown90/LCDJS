@@ -97,25 +97,25 @@ function LCD() {
             });
         });
 
-        var me = this;
+        var lcd = this;
 
         var interval = setInterval(function() {
             'use strict';
             console.log('Me', me);
             if (setup) {
-                this.write4bits(0x33);
-                this.write4bits(0x32);
-                this.write4bits(0x28);
-                this.write4bits(0x0C);
-                this.write4bits(0x06);
+                lcd.write4bits(0x33);
+                lcd.write4bits(0x32);
+                lcd.write4bits(0x28);
+                lcd.write4bits(0x0C);
+                lcd.write4bits(0x06);
 
-                this.displayControl = this.DISPLAYON | this.CURSOROFF | this.BLINKOFF;
-                this.displayFunction = this._4BITMODE | this._1LINE | this._5x8DOTS | this._2LINE;
+                lcd.displayControl = lcd.DISPLAYON | lcd.CURSOROFF | lcd.BLINKOFF;
+                lcd.displayFunction = lcd._4BITMODE | lcd._1LINE | lcd._5x8DOTS | lcd._2LINE;
 
-                this.displayMode = this.ENTRYLEFT | this.ENTRYSHIFTDECREMENT;
-                this.write4bits(this.ENTRYMODESET | this.displayMode);
+                lcd.displayMode = lcd.ENTRYLEFT | lcd.ENTRYSHIFTDECREMENT;
+                lcd.write4bits(lcd.ENTRYMODESET | lcd.displayMode);
 
-                this.clear();
+                lcd.clear();
                 clearInterval(interval);
                 callback();
             }

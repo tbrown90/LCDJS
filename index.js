@@ -59,10 +59,25 @@ function LCD() {
         this.cleanUp();
 
         gpio.setMode(gpio.MODE_BCM);
-        gpio.setup(e, gpio.DIR_OUT, gpioError);
-        gpio.setup(rs, gpio.DIR_OUT, gpioError);
+        gpio.setup(e, gpio.DIR_OUT, function (err) {
+            if (err) {
+                console.log('Error:', err);
+            }
+            console.log('GPIO setup', e);
+        });
+        gpio.setup(rs, gpio.DIR_OUT, function (err) {
+            if (err) {
+                console.log('Error:', err);
+            }
+            console.log('GPIO setup', rs);
+        });
         for (var i = 0; i < db.length; ++i) {
-            gpio.setup(db[i], gpio.DIR_OUT, gpioError);
+            gpio.setup(db[i], gpio.DIR_OUT, function (err) {
+            if (err) {
+                console.log('Error:', err);
+            }
+            console.log('GPIO setup', db[i]);
+        });
         }
 
         this.write4bits(0x33);

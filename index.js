@@ -53,7 +53,7 @@ function LCD() {
         }
     }
 
-    function finishInit(this, callback) {
+    function finishInit(callback) {
         this.write4bits(0x33);
         this.write4bits(0x32);
         this.write4bits(0x28);

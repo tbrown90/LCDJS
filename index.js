@@ -253,11 +253,11 @@ function LCD() {
 
     this.pulseEnable = function pulseEnable() {
         gpio.write(this.pin_e, 0, gpioError);
-        sleep.usleep(5000);
+        sleep.usleep(100);
         gpio.write(this.pin_e, 1, gpioError);
-        sleep.usleep(5000);
+        sleep.usleep(100);
         gpio.write(this.pin_e, 0, gpioError);
-        sleep.usleep(5000);
+        sleep.usleep(100);
     }
 
     function ord(string) {

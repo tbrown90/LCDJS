@@ -101,7 +101,6 @@ function LCD() {
 
         var interval = setInterval(function() {
             'use strict';
-            console.log('Me', me);
             if (setup) {
                 lcd.write4bits(0x33);
                 lcd.write4bits(0x32);

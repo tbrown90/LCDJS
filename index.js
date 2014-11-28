@@ -46,6 +46,9 @@ function LCD() {
         if (err) {
             console.log('Error:', err);
         }
+        else {
+            console.log('GPIO instruction completed');
+        }
     }
 
     this.init = function init(rs, e, db) {

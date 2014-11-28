@@ -101,7 +101,7 @@ function LCD() {
     }
 
     this.begin = function begin(columns, lines) {
-        console.log('Begin:', colum, lines);
+        console.log('Begin:', columns, lines);
         if (lines > 1) {
             this.numLines = lines;
             this.displayFunction |= this._2LINE;

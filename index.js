@@ -99,7 +99,7 @@ function LCD() {
 
         var me = this;
 
-        var interval = setInterval(function(me) {
+        var interval = setInterval(function() {
             'use strict';
             console.log('Me', me);
             if (setup) {

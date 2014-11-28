@@ -3,18 +3,11 @@ var pin_rs = 22;
 var pin_e = 18;
 var pins_db = [16, 11, 13, 15];
 
-lcd.init(pin_rs, pin_e, pins_db);
-lcd.begin(16, 2);
+lcd.init(pin_rs, pin_e, pins_db function() {
+    lcd.begin(16, 2);
 
-var date = new Date();
-var day = date.getDay();
-var month = (date.getMonth() + 1);
-var year = date.getFullYear();
+    lcd.message('Hello World', true);
 
-var dateStr = month + '-' + day + '-' + year;
+    lcd.cleanUp();
+});
 
-while (true) {
-    lcd.message(dateStr, true);
-}
-
-lcd.cleanUp();

@@ -78,6 +78,7 @@ function LCD() {
     }
 
     this.init = function init(rs, e, db, callback) {
+        'use strict';
         console.log('Initializing:', rs, e, db);
         this.pins_rs = rs;
         this.pin_e = e;
@@ -97,6 +98,7 @@ function LCD() {
         });
 
         var interval = setInterval(function() {
+            'use strict';
             if (setup) {
                 this.write4bits(0x33);
                 this.write4bits(0x32);

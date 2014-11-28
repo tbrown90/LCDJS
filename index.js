@@ -71,7 +71,7 @@ function LCD() {
     }
 
     function setupRS(callback) {
-        gpio.setup(rs, gpio.DIR_OUT, function (err) {
+        gpio.setup(this.pin_rs, gpio.DIR_OUT, function (err) {
             gpioError(err);
             console.log('GPIO setup', rs);
 

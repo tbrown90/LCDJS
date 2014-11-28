@@ -232,7 +232,7 @@ function LCD() {
 
         for (var i = 0; i < 4; ++i) {
             if (bits[i] === "1") {
-                gpio.write(this.pins_db.reverse()[i], true, gpioError);
+                gpio.write(this.pins_db[i], true, gpioError);
             }
         }
 
@@ -244,7 +244,7 @@ function LCD() {
 
         for (var i = 4; i < 8; ++i) {
             if (bits[i] === "1") {
-                gpio.write(this.pins_db.reverse()[i - 4], true, gpioError);
+                gpio.write(this.pins_db[i - 4], true, gpioError);
             }
         }
 

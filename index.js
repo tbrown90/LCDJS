@@ -71,15 +71,17 @@ function LCD() {
     }
 
     function setupRS(callback) {
+        console.log('Setting up RS: ', this.pin_rs);
         gpio.setup(this.pin_rs, gpio.DIR_OUT, function (err) {
             gpioError(err);
-            console.log('GPIO setup', rs);
+            console.log('GPIO setup', this.pin_rs);
 
             setupDB(0, callback);
         });
     }
 
     function setupDB(pin, callback) {
+        console.log('Setting up DB: ', this.pins_db[pin]);
          gpio.setup(this.pins_db[pin], gpio.DIR_OUT, function (err) {
             gpioError(err);
             console.log('GPIO setup', this.pins_db[pin]);

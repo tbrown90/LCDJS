@@ -86,7 +86,7 @@ function LCD() {
 
         var waiting = true;
         this.cleanUp();
-
+        gpio.setMode(gpio.MODE_BCM);
         var setup = false;
         gpio.setup(e, gpio.DIR_OUT, function (err) {
             gpioError(err);

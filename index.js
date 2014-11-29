@@ -5,7 +5,7 @@ function LCD() {
     this.lcdScript = 'lcdScript.py';
 
     this.message = function message(message, options, callback) {
-        if (typeof options === function) {
+        if (typeof options === 'function') {
             options =  {
                 scriptPath: './python/',
                 args: [message]

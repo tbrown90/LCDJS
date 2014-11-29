@@ -1,9 +1,9 @@
 var lcd = require('./index.js');
 var sleep = require('sleep');
 
-var pin_rs = 14;
-var pin_e = 15;
-var pins_db = [18, 24, 25, 8];
+var pin_rs = 8;
+var pin_e = 10;
+var pins_db = [12, 18, 22, 24];
 
 lcd.init(pin_rs, pin_e, pins_db, function() {
     lcd.begin(16, 2);

@@ -7,7 +7,7 @@ function LCD() {
     this.message = function message(message, callback) {
 
         var options = {
-            scriptPath = 'python/lcdScript.py';
+            scriptPath: 'python/lcdScript.py',
             args: [message]
         };
 

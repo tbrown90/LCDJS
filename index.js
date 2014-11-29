@@ -230,6 +230,7 @@ function LCD() {
             gpio.write(this.pins_db[i], false, gpioError);
         }
 
+        sleep.usleep(2000);
         var dbReversed = this.pins_db.reverse();
         for (var i = 0; i < 4; ++i) {
             if (bits[i] == "1") {
@@ -243,6 +244,7 @@ function LCD() {
             gpio.write(this.pins_db[i], false, gpioError);
         }
 
+        sleep.usleep(2000);
         for (var i = 4; i < 8; ++i) {
             if (bits[i] == "1") {
                 gpio.write(dbReversed[i - 4], true, gpioError);

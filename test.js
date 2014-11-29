@@ -6,7 +6,7 @@ lcd.message('Good bye moon!', function(err, result) {
         console.log('Error: ', err);
     }
 
-    if (results) {
+    if (results != undefined) {
         console.log('Results: ', results);
     }
 });

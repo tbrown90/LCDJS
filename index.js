@@ -2,11 +2,12 @@
 var PythonShell = require('python-shell');
 
 function LCD() {
-    this.lcdScript = './lcdScript.py';
+    this.lcdScript = 'lcdScript.py';
 
     this.message = function message(message, callback) {
 
         var options = {
+            scriptPath = 'python/lcdScript.py';
             args: [message]
         };
 

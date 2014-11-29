@@ -3,7 +3,7 @@ var sleep = require('sleep');
 
 var pin_rs = 8;
 var pin_e = 10;
-var pins_db = [12, 16, 18, 22];
+var pins_db = [12, 18, 22, 24];
 
 lcd.init(pin_rs, pin_e, pins_db, function() {
     lcd.begin(16, 2);

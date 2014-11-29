@@ -11,12 +11,9 @@ function LCD() {
         };
 
         PythonShell.run(this.lcdScript, options, function(err, results) {
-            if (err) {
-                console.log('Error: ', err);
+            if (callback) {
+                callback(err, results);
             }
-
-            console.log('Results: ', results);
-            callback(err, results);
         });
     }
 }

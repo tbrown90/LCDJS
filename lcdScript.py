@@ -4,8 +4,8 @@ from CharLCD import CharLCD
 import sys
 
 message = '';
-if len(sys.argv) == 0:
-        message = sys.argv[0];
+if len(sys.argv) == 2:
+        message = sys.argv[1];
 
 lcd = CharLCD(14, 15, [18, 24, 25, 8])
 

@@ -10,7 +10,6 @@ lcd.init(pin_rs, pin_e, pins_db, function() {
 
     lcd.message('Hello World', true);
 
-    sleep.sleep(2);
-    lcd.cleanUp();
+    setTimeout(lcd.cleanUp, 2000);
 });
 

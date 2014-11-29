@@ -85,8 +85,8 @@ function LCD() {
         this.pins_db = db;
 
         var waiting = true;
-        this.cleanUp();
         gpio.setMode(gpio.MODE_BCM);
+        sleep.usleep(1000);
         var setup = false;
         gpio.setup(e, gpio.DIR_OUT, function (err) {
             gpioError(err);

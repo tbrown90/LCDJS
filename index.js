@@ -1,10 +1,5 @@
 'use strict';
-var PythonShell = null;
-try {
-    PythonShell = require('python-shell');
-} catch(err) {
-    console.log('Python is not installed on this system.');
-}
+var PythonShell = require('python-shell');
 
 function LCD() {
     this.lcdScript = 'lcdScript.py';

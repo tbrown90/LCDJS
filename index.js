@@ -1,5 +1,10 @@
 'use strict';
-var PythonShell = require('python-shell');
+var PythonShell = null;
+try {
+    PythonShell = require('python-shell');
+} catch (err) {
+    console.log('Error:', err);
+}
 
 function LCD() {
     this.lcdScript = 'lcdScript.py';

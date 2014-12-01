@@ -15,11 +15,15 @@ function LCD() {
 
         options.args = [message];
 
-        PythonShell.run(this.lcdScript, options, function(err, results) {
-            if (callback) {
-                callback(err, results);
-            }
-        });
+        try {
+            PythonShell.run(this.lcdScript, options, function(err, results) {
+                if (callback) {
+                    callback(err, results);
+                }
+            });
+        } catch (err) {
+            console.log('Python is not installed on this system.');
+        }
     }
 }
 

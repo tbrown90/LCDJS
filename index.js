@@ -1,10 +1,5 @@
 'use strict';
-var PythonShell = null;
-try {
-    PythonShell = require('python-shell');
-} catch (err) {
-    console.log('Error:', err);
-}
+var PythonShell = require('python-shell');
 
 function LCD() {
     this.lcdScript = 'lcdScript.py';
@@ -20,15 +15,11 @@ function LCD() {
 
         options.args = [message];
 
-        try {
-            PythonShell.run(this.lcdScript, options, function(err, results) {
-                if (callback) {
-                    callback(err, results);
-                }
-            });
-        } catch (err) {
-            console.log('Python is not installed on this system.');
-        }
+        PythonShell.run(this.lcdScript, options, function(err, results) {
+            if (callback) {
+                callback(err, results);
+            }
+        });
     }
 }
 
